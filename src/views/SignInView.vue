@@ -1,6 +1,16 @@
 <template>
-  <div>
-    <h1>Sign In to an Account</h1>
+  <div class="container">
+    <div class="nav-menu pt-3">
+      <div class="d-flex align-items-center">
+        <img class="default-logo" src="images/logo.png" alt="logo" />
+        <router-link to="/register" class="nav-item text-end w-100">
+          Create an account
+        </router-link>
+      </div>
+    </div>
+    <div class="sign-in-form" style="background-color: aqua;">
+      sdfsdf
+    </div>
     <p><input type="text" placeholder="Email" v-model="email" /></p>
     <p><input type="password" placeholder="Password" v-model="password" /></p>
     <p v-if="errMsg">{{ errMsg }}</p>
