@@ -6,8 +6,8 @@ const routes = [
   {  path: "/register", component: () => import("../views/RegisterView.vue") },
   {  path: "/sign-in", component: () => import("../views/SignInView.vue") },
   {
-    path: "/feed",
-    component: () => import("../views/FeedView.vue"),
+    path: "/user-board",
+    component: () => import("../views/UserBoardView.vue"),
     meta: {
       requireAuth: true
     }
