@@ -8,14 +8,34 @@
         </router-link>
       </div>
     </div>
-    <div class="sign-in-form" style="background-color: aqua;">
-      sdfsdf
+    <div class="sign-in-form d-flex justify-content-center">
+      <div class="default-form">
+        <div class="input-itmes">
+          <p><input type="text" class="base-input form-control" placeholder="Email" v-model="email" /></p>
+          <input type="password" class="base-input form-control" placeholder="Password" v-model="password" />
+        </div>
+        <!-- <p v-if="errMsg">{{ errMsg }}</p> -->
+        <!-- <p><button @click="signInWithGoogle">Sign In With Google</button></p> -->
+        <div class="d-flex justify-content-end">
+          <button class="base-btn-white me-1" @click="signInWithGoogle">
+            <img style="width: 30px; height: auto;" src="/images/icons8-google-64.png" alt="..." />
+          </button>
+          <button class="base-btn btn btn-primary btn-lg" @click="register">Sign in</button>
+        </div>
+      </div>
     </div>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Password" v-model="password" /></p>
-    <p v-if="errMsg">{{ errMsg }}</p>
-    <p><button @click="register">Submit</button></p>
-    <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+    <div v-if="errMsg" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="/images/logo.png" style="width: 25px; height: auto;" class="rounded me-2" alt="...">
+          <strong class="me-auto">Error</strong>
+          <button type="button" class="btn-close" @click="errMsg = ''" aria-label="Close"></button>
+        </div>
+        <div class="toast-body text-start">
+          {{ errMsg }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,3 +97,11 @@ const signInWithGoogle = () => {
 }
 
 </script>
+
+<style scoped>
+
+.sign-in-form {
+  margin-top: 25vh
+}
+
+</style>
