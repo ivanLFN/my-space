@@ -11,7 +11,7 @@ import { useRouter } from "vue-router";
 
 const auth = getAuth();
 const isLoggedIn = ref(false)
-const router = useRouter(); // Get reference to vue router
+const router = useRouter();
 
 onMounted(() => {
   onAuthStateChanged(auth, (user) => {

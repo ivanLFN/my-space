@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div v-if="errMsg" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div v-if="errMsg" class="position-fixed end-0 p-3" style="z-index: 11; bottom: 100px;">
         <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
             <img src="/images/logo.png" style="width: 25px; height: auto;" class="rounded me-2" alt="...">
@@ -66,7 +66,7 @@ const register = () => {
     .then((data) => {
       console.log("Successfully registered!");
       console.log(auth.currentUser)
-      router.push('/feed')
+      router.push('/user-board')
     })
     .catch((error) => {
       console.log(error.code);
@@ -90,7 +90,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user)
-      router.push('/feed')
+      router.push('/user-board')
     })
     .catch((error) => {
       console.log(error.code);
