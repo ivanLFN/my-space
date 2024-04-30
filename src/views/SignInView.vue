@@ -14,13 +14,11 @@
           <p><input type="text" class="base-input form-control" placeholder="Email" v-model="email" /></p>
           <input type="password" class="base-input form-control" placeholder="Password" v-model="password" />
         </div>
-        <!-- <p v-if="errMsg">{{ errMsg }}</p> -->
-        <!-- <p><button @click="signInWithGoogle">Sign In With Google</button></p> -->
         <div class="d-flex justify-content-end">
           <button class="base-btn-white me-1" @click="signInWithGoogle">
             <img style="width: 30px; height: auto;" src="/images/icons8-google-64.png" alt="..." />
           </button>
-          <button class="base-btn btn btn-primary btn-lg" @click="register">Sign in</button>
+          <button class="base-btn btn btn-primary btn-lg" @click="signIn">Sign in</button>
         </div>
       </div>
     </div>
@@ -54,7 +52,7 @@ const password = ref("");
 const errMsg = ref() // ERROR MESSAGE
 const router = useRouter(); // Get reference to vue router
 
-const register = () => {
+const signIn = () => {
   const auth = getAuth()
   signInWithEmailAndPassword(auth, email.value, password.value)
     // eslint-disable-next-line no-unused-vars
