@@ -1,43 +1,50 @@
 <template>
-  <div class="container">
-    <div class="nav-menu pt-3">
-      <div class="d-flex align-items-center">
-        <img class="default-logo" src="images/logo.png" alt="logo" />
-        <router-link to="/register" class="nav-item text-end w-100">
-          Create an account
-        </router-link>
+  <div>
+    <div class="container base-container">
+      <div class="nav-menu pt-3">
+        <div class="d-flex align-items-center">
+          <img class="default-logo" src="images/logo.png" alt="logo" />
+          <router-link to="/register" class="nav-item text-end w-100">
+            Create an account
+          </router-link>
+        </div>
+      </div>
+      <div class="sign-in-form d-flex justify-content-center">
+        <div class="default-form">
+          <div class="input-itmes">
+            <p><input type="text" class="base-input form-control" placeholder="Email" v-model="email" /></p>
+            <input type="password" class="base-input form-control" placeholder="Password" v-model="password" />
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="base-btn-white me-1" @click="signInWithGoogle">
+              <img style="width: 30px; height: auto;" src="/images/icons8-google-64.png" alt="..." />
+            </button>
+            <button class="base-btn btn btn-primary btn-lg" @click="signIn">Sign in</button>
+          </div>
+        </div>
+      </div>
+      <div v-if="errMsg" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="/images/logo.png" style="width: 25px; height: auto;" class="rounded me-2" alt="...">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" @click="errMsg = ''" aria-label="Close"></button>
+          </div>
+          <div class="toast-body text-start">
+            {{ errMsg }}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="sign-in-form d-flex justify-content-center">
-      <div class="default-form">
-        <div class="input-itmes">
-          <p><input type="text" class="base-input form-control" placeholder="Email" v-model="email" /></p>
-          <input type="password" class="base-input form-control" placeholder="Password" v-model="password" />
-        </div>
-        <div class="d-flex justify-content-end">
-          <button class="base-btn-white me-1" @click="signInWithGoogle">
-            <img style="width: 30px; height: auto;" src="/images/icons8-google-64.png" alt="..." />
-          </button>
-          <button class="base-btn btn btn-primary btn-lg" @click="signIn">Sign in</button>
-        </div>
-      </div>
-    </div>
-    <div v-if="errMsg" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-      <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <img src="/images/logo.png" style="width: 25px; height: auto;" class="rounded me-2" alt="...">
-          <strong class="me-auto">Error</strong>
-          <button type="button" class="btn-close" @click="errMsg = ''" aria-label="Close"></button>
-        </div>
-        <div class="toast-body text-start">
-          {{ errMsg }}
-        </div>
-      </div>
+    <div class="footer-position">
+      <FooterComponent />
     </div>
   </div>
+  
 </template>
 
 <script setup>
+import FooterComponent from "@/components/FooterComponent.vue"
 import { ref } from "vue"
 import {
   getAuth,
@@ -90,7 +97,14 @@ const signInWithGoogle = () => {
     })
     .catch((error) => {
       console.log(error.code);
-      alert(error.message)
+      switch (error.code) {
+        case "auth/popup-closed-by-user":
+          errMsg.value = "Popup window closed by user";
+          break;
+        default:
+          errMsg.value = "Google authorization error";
+          break;
+      }
     })
 }
 
@@ -99,7 +113,7 @@ const signInWithGoogle = () => {
 <style scoped>
 
 .sign-in-form {
-  margin-top: 25vh
+  margin-top: 20vh
 }
 
 </style>
