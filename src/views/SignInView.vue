@@ -12,7 +12,7 @@
       <div class="sign-in-form d-flex justify-content-center">
         <div class="default-form">
           <div class="input-itmes">
-            <p><input type="text" class="base-input form-control" placeholder="Email" v-model="email" /></p>
+            <p><input type="text" autofocus class="base-input form-control" placeholder="Email" v-model="email" /></p>
             <input type="password" class="base-input form-control" placeholder="Password" v-model="password" />
           </div>
           <div class="d-flex justify-content-end">
